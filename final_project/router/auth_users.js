@@ -104,63 +104,6 @@ regd_users.delete("/auth/review/:isbn", (req, res) => {
   }
 });
 
-regd_users.delete("/auth/review/:isbn", (req, res) => {
-  if (!req.session.authorization) {
-    return res.status(400).json({ message: "Unauthorized" });
-  }
-  const { username } = req.session.authorization;
-  const isbn = req.params.isbn;
-  if (booksByISBN[isbn]) {
-    let existed_Review = booksByISBN[isbn].reviews; // Corrected here
-    if (existed_Review[username]) {
-      delete existed_Review[username];
-      return res.status(200).json({ message: "Review deleted successfully" });
-    } else {
-      return res.status(400).json({ message: "Unable to delete review" });
-    }
-  } else {
-    return res.status(404).json({ message: "Book by this ISBN number is not present" });
-  }
-});
-
-regd_users.delete("/auth/review/:isbn", (req, res) => {
-  if (!req.session.authorization) {
-    return res.status(400).json({ message: "Unauthorized" });
-  }
-  const { username } = req.session.authorization;
-  const isbn = req.params.isbn;
-  if (booksByISBN[isbn]) {
-    let existed_Review = booksByISBN[isbn].reviews; // Corrected here
-    if (existed_Review[username]) {
-      delete existed_Review[username];
-      return res.status(200).json({ message: "Review deleted successfully" });
-    } else {
-      return res.status(400).json({ message: "Unable to delete review" });
-    }
-  } else {
-    return res.status(404).json({ message: "Book by this ISBN number is not present" });
-  }
-});
-
-  regd_users.delete("/auth/review/:isbn", (req, res) => {
-    if (!req.session.authorization) {
-      return res.status(400).json({ message: "Unauthorized" });
-    }
-    const  username  = req.session.authorization.username;
-    const isbn = req.params.isbn;
-    if (booksByISBN[isbn]) {
-      let existed_Review = booksByISBN[isbn].reviews; // Corrected here
-      if (existed_Review[username]) {
-        delete existed_Review[username];
-        return res.status(200).json({ message: "Review deleted successfully" });
-      } else {
-        return res.status(400).json({ message: "Unable to delete review" });
-      }
-    } else {
-      return res.status(404).json({ message: "Book by this ISBN number is not present" });
-    }
-  });
-
 module.exports.authenticated = regd_users;
 module.exports.isValid = isValid;
 module.exports.users = users;
